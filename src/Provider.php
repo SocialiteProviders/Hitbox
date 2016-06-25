@@ -42,7 +42,7 @@ class Provider extends AbstractProvider implements ProviderInterface
         $username = $this->getUserNameByToken($token);
 
         $response = $this->getHttpClient()->get('https://api.hitbox.tv/user/'.$username, [
-            'query' => ['authToken' => $token]
+            'query' => ['authToken' => $token],
         ]);
 
         return json_decode($response->getBody(), true);
@@ -61,10 +61,10 @@ class Provider extends AbstractProvider implements ProviderInterface
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id'       => array_get($user, 'user_id'),
+            'id' => array_get($user, 'user_id'),
             'nickname' => array_get($user, 'user_name'),
-            'email'    => array_get($user, 'user_email'),
-            'avatar'   => array_get($user, 'user_logo'),
+            'email' => array_get($user, 'user_email'),
+            'avatar' => array_get($user, 'user_logo'),
         ]);
     }
 
@@ -91,8 +91,8 @@ class Provider extends AbstractProvider implements ProviderInterface
     {
         return [
             'request_token' => $code,
-            'app_token'     => $this->clientId,
-            'hash'          => base64_encode($this->clientId.$this->clientSecret),
+            'app_token' => $this->clientId,
+            'hash' => base64_encode($this->clientId.$this->clientSecret),
         ];
     }
 
